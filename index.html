@@ -4,270 +4,854 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Raven House Co. — Farm, Family & Homestead Life in Nova Scotia</title>
-  <meta name="description" content="A working homestead in the Annapolis Valley. Goats, chickens, horses, learning, handmade goods, and the beautiful mess of raising a family close to the land.">
+  <meta name="description" content="A working homestead in the Annapolis Valley. Goats, chickens, horses, handmade goods, and the beautiful mess of raising a family close to the land.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400;700&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Lato:wght@300;400;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --cream:       #F7F2E8;
-      --cream-deep:  #EFE7D5;
-      --ink:         #1C1A17;
-      --ink-mid:     #3D3830;
-      --sage:        #6B7C5E;
-      --sage-light:  #8FA082;
-      --sage-pale:   #E8EDE4;
-      --terracotta:  #C47A52;
-      --terra-pale:  #F2E4D8;
-      --blush:       #E8D5C4;
-      --stone:       #9C9080;
-      --stone-light: #D4CDBF;
+      --cream:      #F8F3E8;
+      --cream-warm: #EFE5CF;
+      --ink:        #1A1713;
+      --ink-mid:    #3A3228;
+      --sage:       #5C6E4A;
+      --sage-light: #849970;
+      --terracotta: #B86B40;
+      --terra-warm: #D4845A;
+      --blush:      #E8D0B8;
+      --stone:      #8C8070;
+      --gold:       #C8A84B;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--ink); font-size: 17px; line-height: 1.7; }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--ink); font-size: 17px; line-height: 1.7; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(247,242,232,0.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--stone-light); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-    .nav-logo { display: flex; align-items: center; text-decoration: none; }
-    .nav-logo img { height: 38px; width: auto; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); transition: color 0.2s; }
-    .nav-links a:hover { color: var(--terracotta); }
-    .nav-cta { background: var(--sage); color: var(--cream) !important; padding: 0.4rem 1.1rem; border-radius: 2px; }
-    .nav-cta:hover { background: var(--ink) !important; }
+    /* ── HEADER / NAV ── */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 16px 2rem 12px;
+      background: rgba(248,243,232,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(140,128,112,0.2);
+      transition: padding 0.3s;
+    }
+    .site-header.scrolled { padding: 10px 2rem 8px; }
+    .header-logo { height: 52px; width: auto; display: block; margin-bottom: 8px; transition: height 0.3s; }
+    .site-header.scrolled .header-logo { height: 36px; margin-bottom: 4px; }
+    .header-nav { display: flex; gap: 2.2rem; list-style: none; }
+    .header-nav a { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mid); transition: color 0.2s; }
+    .header-nav a:hover { color: var(--terracotta); }
+    .header-nav .nav-cta { color: var(--sage); }
+    .header-nav .nav-cta:hover { color: var(--terracotta); }
 
-    /* HERO */
-    .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 0; }
-    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(28,26,23,0.25) 0%, rgba(28,26,23,0.15) 40%, rgba(28,26,23,0.55) 100%); }
-    .hero-content { position: relative; z-index: 2; text-align: center; color: white; padding: 0 1.5rem; max-width: 700px; }
-    .hero-logo { width: 100px; height: auto; filter: brightness(0) invert(1); margin-bottom: 1.5rem; opacity: 0.92; }
-    .hero-tagline { font-family: 'Dancing Script', cursive; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 500; line-height: 1.3; color: rgba(255,255,255,0.95); margin-bottom: 0.75rem; text-shadow: 0 1px 8px rgba(0,0,0,0.3); }
-    .hero-sub { font-size: 0.9rem; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: 2rem; }
-    .hero-btn { display: inline-block; background: var(--terracotta); color: white; text-decoration: none; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.8rem 2rem; border-radius: 2px; transition: background 0.2s; }
-    .hero-btn:hover { background: var(--ink); }
-    .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; color: rgba(255,255,255,0.6); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
-    .hero-scroll::after { content: ''; display: block; width: 1px; height: 40px; background: rgba(255,255,255,0.4); animation: scrollPulse 2s ease-in-out infinite; }
-    @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.9; } }
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh; min-height: 620px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      margin-top: 0;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('506626320_122231613062215594_3741641693581821848_n.jpg') center 30% / cover no-repeat;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26,23,19,0.35) 0%,
+        rgba(26,23,19,0.2) 35%,
+        rgba(26,23,19,0.55) 75%,
+        rgba(26,23,19,0.85) 100%
+      );
+    }
+    /* ripped paper bottom edge */
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 80px;
+      background: var(--cream);
+      clip-path: polygon(
+        0% 100%, 0% 60%, 2% 45%, 4% 55%, 6% 35%, 8% 50%,
+        10% 30%, 12% 48%, 14% 28%, 16% 42%, 18% 22%,
+        20% 40%, 22% 18%, 24% 38%, 26% 20%, 28% 44%,
+        30% 15%, 32% 35%, 34% 12%, 36% 32%, 38% 18%,
+        40% 38%, 42% 14%, 44% 36%, 46% 10%, 48% 30%,
+        50% 8%, 52% 28%, 54% 12%, 56% 34%, 58% 16%,
+        60% 38%, 62% 20%, 64% 42%, 66% 18%, 68% 36%,
+        70% 14%, 72% 32%, 74% 16%, 76% 40%, 78% 22%,
+        80% 44%, 82% 20%, 84% 38%, 86% 24%, 88% 46%,
+        90% 28%, 92% 50%, 94% 32%, 96% 52%, 98% 38%,
+        100% 55%, 100% 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 2rem; max-width: 860px;
+      padding-top: 80px;
+    }
+    .hero-logo-img {
+      height: 90px; width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+      margin-bottom: 1.8rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 300;
+      line-height: 0.9;
+      color: white;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--blush);
+      display: block;
+    }
+    .hero-script {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 2rem;
+      display: block;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.2rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .hero-cta:hover { background: rgba(255,255,255,0.15); border-color: white; }
 
-    /* INTRO */
-    .intro { background: var(--ink); color: var(--cream); padding: 5rem 2rem; text-align: center; }
-    .intro-inner { max-width: 680px; margin: 0 auto; }
-    .intro-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 1.2rem; }
-    .intro h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; line-height: 1.25; margin-bottom: 1.5rem; color: var(--cream); }
-    .intro p { font-size: 1.05rem; font-weight: 300; color: rgba(247,242,232,0.78); line-height: 1.8; }
+    /* ── INTRO BAND ── */
+    .intro-band {
+      position: relative;
+      background: var(--cream);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .intro-band-inner { max-width: 720px; margin: 0 auto; }
+    .intro-band h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      color: var(--ink);
+    }
+    .intro-band h2 em { font-style: italic; color: var(--sage); }
+    .intro-band p { font-size: 1.05rem; color: var(--stone); line-height: 1.85; font-weight: 300; }
+    .intro-feather {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      color: var(--terracotta);
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
 
-    /* DISCOVER */
-    .discover { padding: 6rem 2rem; background: var(--cream); }
-    .section-label { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--terracotta); text-align: center; margin-bottom: 0.5rem; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; text-align: center; margin-bottom: 3.5rem; color: var(--ink); }
-    .discover-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; max-width: 1050px; margin: 0 auto; }
-    .discover-card { display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; color: inherit; transition: transform 0.25s; }
-    .discover-card:hover { transform: translateY(-4px); }
-    .discover-img-wrap { width: 220px; height: 220px; border-radius: 50%; overflow: hidden; margin-bottom: 1.4rem; border: 3px solid var(--stone-light); flex-shrink: 0; }
-    .discover-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-    .discover-card:hover .discover-img-wrap img { transform: scale(1.05); }
-    .discover-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 400; margin-bottom: 0.6rem; color: var(--ink); }
-    .discover-card p { font-size: 0.9rem; color: var(--stone); line-height: 1.65; max-width: 260px; }
-    .card-link { display: inline-block; margin-top: 0.9rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); border-bottom: 1px solid var(--sage-light); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
-    .discover-card:hover .card-link { color: var(--terracotta); border-color: var(--terracotta); }
+    /* ── WOOD TEXTURE SECTION ── */
+    .wood-section {
+      position: relative;
+      overflow: hidden;
+    }
+    .wood-bg {
+      position: absolute; inset: 0;
+      background: url('pexels-enginakyurt-6086271.jpg') center / cover no-repeat;
+    }
+    .wood-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(26,23,19,0.72);
+    }
+    /* ripped top edge */
+    .wood-section::before {
+      content: '';
+      position: absolute; top: -2px; left: 0; right: 0; z-index: 2;
+      height: 70px;
+      background: var(--cream);
+      clip-path: polygon(
+        0% 0%, 0% 55%, 2% 70%, 4% 50%, 6% 72%, 8% 48%,
+        10% 68%, 12% 45%, 14% 65%, 16% 42%, 18% 60%,
+        20% 38%, 22% 58%, 24% 35%, 26% 55%, 28% 32%,
+        30% 52%, 32% 28%, 34% 48%, 36% 25%, 38% 45%,
+        40% 22%, 42% 42%, 44% 18%, 46% 38%, 48% 15%,
+        50% 35%, 52% 12%, 54% 32%, 56% 8%, 58% 28%,
+        60% 5%, 62% 25%, 64% 2%, 66% 22%, 68% 5%,
+        70% 25%, 72% 8%, 74% 28%, 76% 12%, 78% 32%,
+        80% 15%, 82% 35%, 84% 18%, 86% 38%, 88% 22%,
+        90% 42%, 92% 28%, 94% 48%, 96% 35%, 98% 52%,
+        100% 42%, 100% 0%
+      );
+    }
+    /* ripped bottom edge */
+    .wood-section::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0; right: 0; z-index: 2;
+      height: 70px;
+      background: var(--cream);
+      clip-path: polygon(
+        0% 100%, 0% 45%, 3% 60%, 6% 38%, 9% 58%, 12% 32%,
+        15% 52%, 18% 28%, 21% 48%, 24% 22%, 27% 42%,
+        30% 18%, 33% 38%, 36% 15%, 39% 35%, 42% 12%,
+        45% 32%, 48% 8%, 51% 28%, 54% 5%, 57% 25%,
+        60% 2%, 63% 22%, 66% 5%, 69% 28%, 72% 10%,
+        75% 32%, 78% 15%, 81% 38%, 84% 20%, 87% 42%,
+        90% 25%, 93% 48%, 96% 35%, 100% 50%, 100% 100%
+      );
+    }
+    .wood-content {
+      position: relative; z-index: 1;
+      padding: 8rem 2rem;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .wood-content .big-script {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 600;
+      color: var(--blush);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .wood-content p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(248,243,232,0.82);
+      line-height: 1.6;
+    }
 
-    /* MOSAIC */
-    .mosaic { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 280px 280px; gap: 4px; }
+    /* ── DISCOVER ── */
+    .discover {
+      background: var(--cream);
+      padding: 6rem 2rem 5rem;
+    }
+    .discover-head {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .discover-head .script-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: var(--terracotta);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .discover-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    .discover-items { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+
+    .discover-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 480px;
+      position: relative;
+      overflow: hidden;
+    }
+    .discover-item:nth-child(even) { direction: rtl; }
+    .discover-item:nth-child(even) > * { direction: ltr; }
+
+    .di-photo {
+      position: relative;
+      overflow: hidden;
+    }
+    .di-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .discover-item:hover .di-photo img { transform: scale(1.04); }
+
+    /* diagonal slice between photo and text */
+    .di-photo::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      background: var(--cream);
+      clip-path: polygon(60% 0%, 100% 0%, 40% 100%, 0% 100%);
+    }
+    .discover-item:nth-child(odd) .di-photo::after { right: -1px; }
+    .discover-item:nth-child(even) .di-photo::after { left: -1px; clip-path: polygon(0% 0%, 40% 0%, 100% 100%, 60% 100%); }
+
+    .di-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 4rem 3rem 3rem;
+      background: var(--cream);
+    }
+    .discover-item:nth-child(even) .di-text { padding: 3rem 3rem 3rem 4rem; }
+
+    .di-text .script-accent {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: var(--terracotta);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .di-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+    .di-text p {
+      font-size: 0.97rem;
+      color: var(--stone);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      max-width: 380px;
+    }
+    .di-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage);
+      transition: gap 0.2s, color 0.2s;
+    }
+    .di-link::after { content: '→'; transition: transform 0.2s; }
+    .di-link:hover { color: var(--terracotta); gap: 0.9rem; }
+
+    /* separator between discover items */
+    .discover-sep {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--blush), transparent);
+      margin: 0 4rem;
+    }
+
+    /* ── FOREST SECTION ── */
+    .forest-section {
+      position: relative;
+      overflow: hidden;
+    }
+    .forest-bg {
+      position: absolute; inset: 0;
+      background: url('pexels-lauripoldre-27584850.jpg') center / cover no-repeat;
+    }
+    .forest-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,23,19,0.78) 0%, rgba(44,58,36,0.65) 100%);
+    }
+    .forest-section::before {
+      content: '';
+      position: absolute; top: -2px; left: 0; right: 0; z-index: 2;
+      height: 80px;
+      background: var(--cream);
+      clip-path: polygon(
+        0% 0%, 0% 62%, 3% 48%, 6% 65%, 9% 42%, 12% 60%,
+        15% 38%, 18% 55%, 21% 32%, 24% 50%, 27% 28%,
+        30% 46%, 33% 22%, 36% 42%, 39% 18%, 42% 38%,
+        45% 14%, 48% 35%, 51% 10%, 54% 30%, 57% 8%,
+        60% 28%, 63% 5%, 66% 25%, 69% 2%, 72% 22%,
+        75% 0%, 78% 20%, 81% 5%, 84% 28%, 87% 12%,
+        90% 35%, 93% 18%, 96% 40%, 100% 28%, 100% 0%
+      );
+    }
+    .forest-section::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0; right: 0; z-index: 2;
+      height: 80px;
+      background: var(--cream-warm);
+      clip-path: polygon(
+        0% 100%, 0% 38%, 4% 55%, 8% 32%, 12% 52%, 16% 28%,
+        20% 48%, 24% 22%, 28% 42%, 32% 18%, 36% 38%,
+        40% 15%, 44% 35%, 48% 10%, 52% 32%, 56% 8%,
+        60% 28%, 64% 5%, 68% 25%, 72% 2%, 76% 22%,
+        80% 5%, 84% 28%, 88% 12%, 92% 35%, 96% 20%,
+        100% 38%, 100% 100%
+      );
+    }
+    .forest-content {
+      position: relative; z-index: 1;
+      padding: 9rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .forest-content blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 300;
+      font-style: italic;
+      color: white;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+    .forest-content .quote-script {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      color: var(--blush);
+      display: block;
+    }
+
+    /* ── PHOTO MOSAIC ── */
+    .mosaic-section {
+      background: var(--cream-warm);
+      padding: 5rem 2rem;
+    }
+    .mosaic-head {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .mosaic-head .script-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: var(--terracotta);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .mosaic-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 400;
+      color: var(--ink);
+    }
+    .mosaic {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      grid-template-rows: 260px 260px;
+      gap: 6px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
     .mosaic-item { overflow: hidden; position: relative; }
     .mosaic-item.tall { grid-row: span 2; }
     .mosaic-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-    .mosaic-item:hover img { transform: scale(1.04); }
+    .mosaic-item:hover img { transform: scale(1.06); }
 
-    /* STORY */
-    .story { padding: 7rem 2rem; background: var(--cream-deep); }
-    .story-inner { max-width: 1050px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-    .story-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center top; display: block; border-radius: 2px; }
-    .story-img { position: relative; }
-    .story-img-accent { position: absolute; bottom: -1.5rem; right: -1.5rem; width: 160px; height: 160px; object-fit: cover; border-radius: 50%; border: 4px solid var(--cream-deep); box-shadow: 0 4px 20px rgba(28,26,23,0.15); }
-    .story-text .intro-eyebrow { text-align: left; }
-    .story-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; line-height: 1.25; margin-bottom: 1.5rem; }
-    .story-text h2 em { font-style: italic; color: var(--sage); }
-    .story-text p { color: var(--ink-mid); margin-bottom: 1.2rem; font-size: 1rem; }
-    .story-text p:last-of-type { margin-bottom: 1.8rem; }
-    .btn-outline { display: inline-block; border: 1.5px solid var(--ink); color: var(--ink); text-decoration: none; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.75rem 1.6rem; border-radius: 2px; transition: background 0.2s, color 0.2s; }
-    .btn-outline:hover { background: var(--ink); color: var(--cream); }
+    /* ── FLOWERS SECTION ── */
+    .flowers-section {
+      position: relative;
+      overflow: hidden;
+    }
+    .flowers-bg {
+      position: absolute; inset: 0;
+      background: url('pexels-fangyuanzhiwai-37665824.jpg') center 40% / cover no-repeat;
+    }
+    .flowers-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(248,243,232,0.92) 0%, rgba(248,243,232,0.6) 40%, rgba(248,243,232,0.88) 100%);
+    }
+    .flowers-section::before {
+      content: '';
+      position: absolute; top: -2px; left: 0; right: 0; z-index: 2;
+      height: 60px;
+      background: var(--cream-warm);
+      clip-path: polygon(
+        0% 0%, 0% 70%, 5% 50%, 10% 68%, 15% 45%,
+        20% 62%, 25% 40%, 30% 58%, 35% 35%,
+        40% 55%, 45% 30%, 50% 50%, 55% 28%,
+        60% 48%, 65% 25%, 70% 45%, 75% 22%,
+        80% 42%, 85% 18%, 90% 38%, 95% 55%,
+        100% 38%, 100% 0%
+      );
+    }
+    .flowers-content {
+      position: relative; z-index: 1;
+      padding: 7rem 2rem;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .flowers-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1.2rem;
+    }
+    .flowers-content h2 em { font-style: italic; color: var(--sage); }
+    .flowers-content p {
+      font-size: 1rem;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+    .btn-terracotta {
+      display: inline-block;
+      background: var(--terracotta);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.2rem;
+      transition: background 0.2s;
+    }
+    .btn-terracotta:hover { background: var(--ink); }
 
-    /* PILLARS */
-    .pillars { padding: 6rem 2rem; background: var(--sage-pale); }
-    .pillars-inner { max-width: 1050px; margin: 0 auto; }
-    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
-    .pillar { background: var(--cream); padding: 2.2rem 1.8rem; border-radius: 2px; border-top: 3px solid var(--terracotta); }
-    .pillar-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
-    .pillar h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 500; margin-bottom: 0.7rem; }
-    .pillar p { font-size: 0.92rem; color: var(--stone); line-height: 1.7; }
+    /* ── EGGS FEATURE ── */
+    .eggs-feature {
+      position: relative;
+      overflow: hidden;
+      background: var(--ink);
+    }
+    .eggs-feature-bg {
+      position: absolute; inset: 0;
+      background: url('pexels-sophia-martin-1233444864-22764391.jpg') center / cover no-repeat;
+      opacity: 0.18;
+    }
+    .eggs-feature::before {
+      content: '';
+      position: absolute; top: -2px; left: 0; right: 0; z-index: 2;
+      height: 70px;
+      background: var(--cream);
+      clip-path: polygon(
+        0% 0%, 0% 55%, 4% 70%, 8% 48%, 12% 65%,
+        16% 42%, 20% 60%, 24% 35%, 28% 55%,
+        32% 30%, 36% 52%, 40% 25%, 44% 48%,
+        48% 20%, 52% 42%, 56% 18%, 60% 40%,
+        64% 15%, 68% 38%, 72% 12%, 76% 35%,
+        80% 18%, 84% 42%, 88% 25%, 92% 48%,
+        96% 32%, 100% 50%, 100% 0%
+      );
+    }
+    .eggs-feature-content {
+      position: relative; z-index: 1;
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 7rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .eggs-text .script-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: var(--terra-warm);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .eggs-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+    .eggs-text p { font-size: 0.97rem; color: rgba(248,243,232,0.7); line-height: 1.8; margin-bottom: 1rem; }
+    .btn-ghost-light {
+      display: inline-block;
+      border: 1.5px solid rgba(248,243,232,0.5);
+      color: var(--cream);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      margin-top: 0.5rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-ghost-light:hover { background: rgba(248,243,232,0.1); border-color: var(--cream); }
+    .eggs-photo-stack {
+      position: relative;
+      height: 420px;
+    }
+    .eps-main {
+      position: absolute;
+      top: 0; right: 0;
+      width: 82%;
+      height: 88%;
+      object-fit: cover;
+      display: block;
+    }
+    .eps-accent {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 52%;
+      height: 52%;
+      object-fit: cover;
+      display: block;
+      border: 4px solid var(--ink);
+    }
 
-    /* QUOTE STRIP */
-    .quote-strip { position: relative; padding: 7rem 2rem; overflow: hidden; text-align: center; }
-    .quote-strip-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-    .quote-strip-overlay { position: absolute; inset: 0; background: rgba(28,26,23,0.62); }
-    .quote-strip-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; color: white; }
-    .quote-mark { font-family: 'Playfair Display', serif; font-size: 5rem; line-height: 0.5; color: var(--terracotta); display: block; margin-bottom: 1.5rem; }
-    blockquote { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-style: italic; font-weight: 400; line-height: 1.5; color: white; margin-bottom: 1.5rem; }
-    .quote-attr { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
-
-    /* FOOTER */
-    footer { background: var(--ink); color: var(--cream); padding: 4rem 2rem 2rem; }
-    .footer-inner { max-width: 1050px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(247,242,232,0.1); }
-    .footer-brand img { height: 60px; width: auto; filter: brightness(0) invert(1); opacity: 0.85; margin-bottom: 1rem; }
-    .footer-brand p { font-size: 0.9rem; color: rgba(247,242,232,0.55); line-height: 1.7; max-width: 280px; }
-    .footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 1.2rem; }
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 5rem 2rem 2.5rem;
+      position: relative;
+    }
+    footer::before {
+      content: '';
+      position: absolute; top: -2px; left: 0; right: 0;
+      height: 60px;
+      background: var(--cream);
+      clip-path: polygon(
+        0% 0%, 0% 65%, 5% 48%, 10% 62%, 15% 40%,
+        20% 58%, 25% 35%, 30% 52%, 35% 28%,
+        40% 48%, 45% 25%, 50% 45%, 55% 22%,
+        60% 42%, 65% 18%, 70% 38%, 75% 15%,
+        80% 35%, 85% 12%, 90% 32%, 95% 50%,
+        100% 35%, 100% 0%
+      );
+    }
+    .footer-logo-wrap {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(248,243,232,0.1);
+    }
+    .footer-logo-wrap img {
+      height: 56px; width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.75;
+    }
+    .footer-script {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      color: var(--sage-light);
+      margin-top: 0.5rem;
+      display: block;
+    }
+    .footer-grid {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(248,243,232,0.08);
+    }
+    .footer-about p { font-size: 0.9rem; color: rgba(248,243,232,0.5); line-height: 1.75; max-width: 300px; }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 1.2rem; }
     .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 0.6rem; }
-    .footer-col ul a { text-decoration: none; color: rgba(247,242,232,0.65); font-size: 0.9rem; transition: color 0.2s; }
-    .footer-col ul a:hover { color: var(--terracotta); }
-    .footer-bottom { max-width: 1050px; margin: 0 auto; padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: rgba(247,242,232,0.35); }
-    .footer-email a { color: var(--terracotta); text-decoration: none; }
+    .footer-col ul li { margin-bottom: 0.55rem; }
+    .footer-col ul a { font-size: 0.9rem; color: rgba(248,243,232,0.55); transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--terra-warm); }
+    .footer-bottom {
+      max-width: 1050px; margin: 0 auto;
+      padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.75rem; color: rgba(248,243,232,0.28);
+    }
+    .footer-email a { color: var(--terra-warm); }
 
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+
+    /* ── MOBILE ── */
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .discover-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 200px); }
+      .header-nav { gap: 1.2rem; }
+      .header-nav a { font-size: 0.65rem; }
+      .discover-item { grid-template-columns: 1fr; min-height: auto; }
+      .discover-item:nth-child(even) { direction: ltr; }
+      .di-photo { height: 280px; }
+      .di-photo::after { display: none; }
+      .di-text { padding: 2rem 1.5rem; }
+      .discover-sep { margin: 0 1.5rem; }
+      .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 180px); }
       .mosaic-item.tall { grid-row: span 1; }
-      .story-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .story-img-accent { display: none; }
-      .pillars-grid { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .eggs-feature-content { grid-template-columns: 1fr; gap: 3rem; }
+      .eggs-photo-stack { height: 280px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo"><img src="ravenhouseLogo.png" alt="Raven House Co."></a>
-  <ul class="nav-links">
-    <li><a href="rh-about.html">About Us</a></li>
+<!-- HEADER -->
+<header class="site-header" id="site-header">
+  <img src="ravenhouseLogo.png" alt="Raven House Co." class="header-logo">
+  <ul class="header-nav">
+    <li><a href="rh-about.html">About</a></li>
     <li><a href="rh-farm.html">Farm & Homestead</a></li>
-    <li><a href="rh-learning.html">RH Learning</a></li>
     <li><a href="rh-shop.html">Shop & Studio</a></li>
     <li><a href="rh-contact.html" class="nav-cta">Say Hello</a></li>
   </ul>
-</nav>
+</header>
 
+<!-- HERO -->
 <section class="hero">
-  <img class="hero-img" src="517360366_122237813816215594_4797684656958102494_n__1_.jpg" alt="The path at Raven House — children and the cat heading into the green">
-  <div class="hero-overlay"></div>
+  <div class="hero-bg"></div>
   <div class="hero-content">
-    <img class="hero-logo" src="ravenhouseLogo.png" alt="Raven House Co.">
-    <p class="hero-tagline">Chaos and magic in equal measure.</p>
-    <p class="hero-sub">Annapolis Valley, Nova Scotia</p>
-    <a href="rh-about.html" class="hero-btn">Come on in</a>
-  </div>
-  <div class="hero-scroll">scroll</div>
-</section>
-
-<section class="intro">
-  <div class="intro-inner">
-    <p class="intro-eyebrow">A working homestead</p>
-    <h2>We tend animals, grow things, make colossal messes, and learn as we go.</h2>
-    <p>What started as a family finding home has become a world we love to share — fresh eggs, baby goats, handmade goods, small-group learning, and the everyday rhythm of a life lived close to the land.</p>
+    <img src="ravenhouseLogo.png" alt="Raven House Co." class="hero-logo-img">
+    <h1 class="hero-title">
+      Raven<br>
+      <em>House Co.</em>
+    </h1>
+    <span class="hero-script">Annapolis Valley, Nova Scotia</span>
+    <a href="rh-about.html" class="hero-cta">Come on in</a>
   </div>
 </section>
 
-<section class="discover">
-  <p class="section-label">Explore</p>
-  <h2 class="section-title">What we do here</h2>
-  <div class="discover-grid">
-    <a href="rh-farm.html" class="discover-card">
-      <div class="discover-img-wrap"><img src="524331212_122242383350215594_2793304318457154875_n.jpg" alt="Baby goat at Raven House"></div>
-      <h3>Farm & Homestead</h3>
-      <p>Goats, chickens, cattle, horses, ducks, and the daily rhythms that come with caring for a working farm.</p>
-      <span class="card-link">Meet the farm</span>
-    </a>
-    <a href="rh-learning.html" class="discover-card">
-      <div class="discover-img-wrap"><img src="526309937_122243389238215594_7079442055674244404_n.jpg" alt="Children learning outdoors at Raven House"></div>
-      <h3>RH Learning</h3>
-      <p>Small-group circles and one-on-one tutoring where curiosity is encouraged and the farm is the classroom.</p>
-      <span class="card-link">Learn more</span>
-    </a>
-    <a href="rh-shop.html" class="discover-card">
-      <div class="discover-img-wrap"><img src="516800915_122238290534215594_3554167806495023009_n.jpg" alt="The Raven House studio shed"></div>
-      <h3>Shop & Studio</h3>
-      <p>Fresh eggs, handmade candles, seasonal goods from the garden, and small-batch creations from our studio.</p>
-      <span class="card-link">Visit the shop</span>
-    </a>
+<!-- INTRO -->
+<section class="intro-band">
+  <div class="intro-band-inner">
+    <span class="intro-feather reveal">A working homestead</span>
+    <h2 class="reveal reveal-delay-1">We tend animals, grow things,<br>make <em>colossal messes</em>,<br>and learn as we go.</h2>
+    <p class="reveal reveal-delay-2">What started as a family finding home has become a world we love to share — fresh eggs, baby goats, handmade goods, and the everyday rhythm of a life lived close to the land.</p>
   </div>
 </section>
 
-<div class="mosaic">
-  <div class="mosaic-item tall"><img src="492008406_122221383926215594_5791757633107125899_n__1_.jpg" alt="Little one with egg basket"></div>
-  <div class="mosaic-item"><img src="497511940_122225151752215594_437142422668791171_n.jpg" alt="Baby goats"></div>
-  <div class="mosaic-item"><img src="512690907_122235266804215594_4171212690145249456_n.jpg" alt="Child on horseback in princess dress"></div>
-  <div class="mosaic-item"><img src="675645439_122290086836215594_1106015509438971186_n__1_.jpg" alt="Two goats smiling"></div>
-  <div class="mosaic-item"><img src="520293466_122240008400215594_999926031470040256_n__1_.jpg" alt="Child reading with baby chick"></div>
-  <div class="mosaic-item"><img src="642833972_122281486574215594_5246608651952162421_n.jpg" alt="Mother goat with kid"></div>
+<!-- WOOD BAND -->
+<div class="wood-section">
+  <div class="wood-bg"></div>
+  <div class="wood-content reveal">
+    <span class="big-script">Chaos and magic<br>in equal measure.</span>
+    <p>The ravens were waiting when we arrived. They haven't left. Neither have we.</p>
+  </div>
 </div>
 
-<section class="story">
-  <div class="story-inner">
-    <div class="story-img">
-      <img src="514357031_122236713518215594_2957765165542490021_n.jpg" alt="Chris with the horse at Raven House">
-      <img class="story-img-accent" src="506626320_122231613062215594_3741641693581821848_n.jpg" alt="Girl with cat at Raven House">
+<!-- DISCOVER -->
+<section class="discover">
+  <div class="discover-head reveal">
+    <span class="script-label">Explore</span>
+    <h2>What we do here</h2>
+  </div>
+  <div class="discover-items">
+
+    <div class="discover-item reveal">
+      <div class="di-photo">
+        <img src="675645439_122290086836215594_1106015509438971186_n__1_.jpg" alt="Two goats at Raven House">
+      </div>
+      <div class="di-text">
+        <span class="script-accent">The land & animals</span>
+        <h3>Farm &<br>Homestead</h3>
+        <p>Goats, cattle, horses, chickens, ducks — and the daily work of caring for them. We didn't grow up doing this. We're still learning, and that's fine.</p>
+        <a href="rh-farm.html" class="di-link">Meet the farm</a>
+      </div>
     </div>
-    <div class="story-text">
-      <p class="intro-eyebrow">Our story</p>
-      <h2>We found ourselves owners of a nearly 200-year-old home. It felt less like moving in and more like stepping into <em>a living history.</em></h2>
-      <p>In 2023, we moved to the Annapolis Valley, just outside Greenwood. Ravens circled the driveway on moving day, as if waiting.</p>
-      <p>We traded commutes for river walks, decades-old spruce, and the way the valley changes with the seasons. The farm has taught us more than we expected.</p>
-      <p>Here we are raising our children to notice, to wonder, and to take part in the crazy we call life.</p>
-      <a href="rh-about.html" class="btn-outline">Read our story</a>
+
+    <div class="discover-sep"></div>
+
+    <div class="discover-item reveal">
+      <div class="di-photo">
+        <img src="516800915_122238290534215594_3554167806495023009_n.jpg" alt="The Raven House studio shed">
+      </div>
+      <div class="di-text">
+        <span class="script-accent">Made by hand</span>
+        <h3>Shop &<br>Studio</h3>
+        <p>Fresh eggs from the flock. Candles made in the studio shed. Seasonal goods when the garden allows. Everything comes from here.</p>
+        <a href="rh-shop.html" class="di-link">Visit the shop</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOREST QUOTE -->
+<div class="forest-section">
+  <div class="forest-bg"></div>
+  <div class="forest-content reveal">
+    <blockquote>"We are raising our children to notice, to wonder, and to take part in the crazy we call life."</blockquote>
+    <span class="quote-script">— Raven House Co.</span>
+  </div>
+</div>
+
+<!-- PHOTO MOSAIC -->
+<section class="mosaic-section">
+  <div class="mosaic-head reveal">
+    <span class="script-label">Life at Raven House</span>
+    <h2>The everyday, unfiltered.</h2>
+  </div>
+  <div class="mosaic reveal">
+    <div class="mosaic-item tall">
+      <img src="492008406_122221383926215594_5791757633107125899_n__1_.jpg" alt="Little one with egg basket">
+    </div>
+    <div class="mosaic-item">
+      <img src="497511940_122225151752215594_437142422668791171_n.jpg" alt="Baby goats">
+    </div>
+    <div class="mosaic-item">
+      <img src="512690907_122235266804215594_4171212690145249456_n.jpg" alt="Child on horseback">
+    </div>
+    <div class="mosaic-item tall">
+      <img src="524331212_122242383350215594_2793304318457154875_n.jpg" alt="Baby goat portrait">
+    </div>
+    <div class="mosaic-item">
+      <img src="520293466_122240008400215594_999926031470040256_n__1_.jpg" alt="Child reading with chick">
+    </div>
+    <div class="mosaic-item">
+      <img src="520105646_122240299328215594_1696924346446169414_n.jpg" alt="Boy with the calf">
     </div>
   </div>
 </section>
 
-<section class="pillars">
-  <div class="pillars-inner">
-    <p class="section-label" style="text-align:center;">What we share</p>
-    <h2 class="section-title">Three ways to find us</h2>
-    <div class="pillars-grid">
-      <div class="pillar">
-        <div class="pillar-icon">🌿</div>
-        <h3>Homestead Life</h3>
-        <p>From feeding animals to gathering eggs, our homestead is a daily practice of care. The muddy boots, the early mornings, the colossal messes — we share all of it.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">📚</div>
-        <h3>RH Learning</h3>
-        <p>Small group circles and one-on-one tutoring for grades 1–6. Curiosity is encouraged, creativity is celebrated, and learning happens at each child's own pace.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon">🕯️</div>
-        <h3>Handmade & Homegrown</h3>
-        <p>Candles, crafts, fresh eggs, and seasonal offerings — each carrying the quiet magic of the seasons and made with care from our home studio.</p>
-      </div>
+<!-- FLOWERS / STORY -->
+<div class="flowers-section">
+  <div class="flowers-bg"></div>
+  <div class="flowers-content reveal">
+    <h2>A nearly 200-year-old home.<br><em>Six of us. No experience.</em><br>The farm did the rest.</h2>
+    <p>In 2023 we moved to the Annapolis Valley and found ourselves owners of a place with more history than we knew what to do with. The ravens circled on moving day, as if they'd been waiting. We named it after them.</p>
+    <a href="rh-about.html" class="btn-terracotta">Our story</a>
+  </div>
+</div>
+
+<!-- EGGS FEATURE -->
+<section class="eggs-feature">
+  <div class="eggs-feature-bg"></div>
+  <div class="eggs-feature-content">
+    <div class="eggs-text reveal">
+      <span class="script-label">Available now</span>
+      <h2>Laid by happy birds.<br>Collected by noisy kids.</h2>
+      <p>Pasture-raised, mixed flock — chickens and ducks. Cream, brown, and blue-green shells. Sold by the dozen, Greenwood area pickup.</p>
+      <p>Get in touch and we'll add you to the list.</p>
+      <a href="rh-contact.html" class="btn-ghost-light">Get on the egg list</a>
+    </div>
+    <div class="eggs-photo-stack reveal reveal-delay-1">
+      <img class="eps-main" src="488856518_122215201838215594_6727058613650988504_n.jpg" alt="Farm fresh egg carton">
+      <img class="eps-accent" src="492008406_122221383926215594_5791757633107125899_n__1_.jpg" alt="Little one with egg basket">
     </div>
   </div>
 </section>
 
-<section class="quote-strip">
-  <img class="quote-strip-bg" src="520105646_122240299328215594_1696924346446169414_n.jpg" alt="Boy with the calf">
-  <div class="quote-strip-overlay"></div>
-  <div class="quote-strip-content">
-    <span class="quote-mark">"</span>
-    <blockquote>Raven House is home — chaos and magic in equal measure.</blockquote>
-    <p class="quote-attr">Raven House Co.</p>
-  </div>
-</section>
-
+<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="ravenhouseLogo.png" alt="Raven House Co.">
-      <p>A working homestead in the Annapolis Valley of Nova Scotia. Farm life, small-group learning, handmade goods, and the honest work of raising a family close to the land.</p>
+  <div class="footer-logo-wrap">
+    <img src="ravenhouseLogo.png" alt="Raven House Co.">
+    <span class="footer-script">Annapolis Valley, Nova Scotia</span>
+  </div>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <p>A working homestead in the Annapolis Valley. Farm life, handmade goods, and the honest work of raising a family close to the land.</p>
     </div>
     <div class="footer-col">
-      <h4>Explore</h4>
+      <h4>Pages</h4>
       <ul>
         <li><a href="rh-about.html">About Us</a></li>
         <li><a href="rh-farm.html">Farm & Homestead</a></li>
-        <li><a href="rh-learning.html">RH Learning</a></li>
         <li><a href="rh-shop.html">Shop & Studio</a></li>
         <li><a href="rh-contact.html">Contact</a></li>
       </ul>
@@ -275,10 +859,10 @@
     <div class="footer-col">
       <h4>Find us</h4>
       <ul>
-        <li><a href="#">Follow on Facebook</a></li>
-        <li><a href="#">Follow on Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
       </ul>
-      <div class="footer-email" style="margin-top:1.5rem;">
+      <div class="footer-email" style="margin-top:1.4rem;">
         <h4>Say hello</h4>
         <a href="mailto:hello@ravenhouseco.ca">hello@ravenhouseco.ca</a>
       </div>
@@ -290,5 +874,23 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  // Scroll shrink header
+  var header = document.getElementById('site-header');
+  window.addEventListener('scroll', function(){
+    header.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
+
+  // Scroll reveal
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(function(r){ observer.observe(r); });
+})();
+</script>
 </body>
 </html>
