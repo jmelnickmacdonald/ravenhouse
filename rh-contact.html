@@ -1,1 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Raven House Co.</title>
+  <meta name="description" content="Get in touch with Raven House Co. — eggs, RH Learning, studio goods, or just to say hello.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400;700&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream:#F7F2E8; --cream-deep:#EFE7D5; --ink:#1C1A17; --ink-mid:#3D3830;
+      --sage:#6B7C5E; --sage-light:#8FA082; --sage-pale:#E8EDE4;
+      --terracotta:#C47A52; --terra-pale:#F2E4D8; --blush:#E8D5C4;
+      --stone:#9C9080; --stone-light:#D4CDBF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--ink); font-size: 17px; line-height: 1.7; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(247,242,232,0.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--stone-light); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 38px; width: auto; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--terracotta); }
+    .nav-links a.active { color: var(--sage); }
+    .nav-cta { background: var(--sage); color: var(--cream) !important; padding: 0.4rem 1.1rem; border-radius: 2px; }
+    .nav-cta:hover { background: var(--ink) !important; }
+    .page-header { margin-top: 60px; position: relative; height: 45vh; min-height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 3rem 2rem; }
+    .page-header-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
+    .page-header-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(28,26,23,0.82) 0%, rgba(28,26,23,0.1) 60%); }
+    .page-header-content { position: relative; z-index: 2; max-width: 1050px; width: 100%; margin: 0 auto; }
+    .page-eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 0.6rem; }
+    .page-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; color: white; line-height: 1.2; }
+    .page-header h1 em { font-style: italic; color: var(--blush); }
+    .contact-main { padding: 6rem 2rem; background: var(--cream); }
+    .contact-main-inner { max-width: 1050px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.1fr; gap: 6rem; align-items: start; }
+    .contact-info h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.3; margin-bottom: 1.3rem; }
+    .contact-info p { color: var(--ink-mid); font-size: 1rem; margin-bottom: 1rem; }
+    .contact-divider { border: none; border-top: 1px solid var(--stone-light); margin: 2rem 0; }
+    .contact-block { margin-bottom: 2rem; }
+    .contact-block-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.4rem; display: block; }
+    .contact-block h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .contact-block p { font-size: 0.92rem; color: var(--stone); margin-bottom: 0; }
+    .contact-email { display: inline-block; margin-top: 0.3rem; color: var(--terracotta); text-decoration: none; font-size: 1rem; border-bottom: 1px solid var(--blush); transition: border-color 0.2s, color 0.2s; }
+    .contact-email:hover { color: var(--ink); border-color: var(--ink); }
+    .social-links { display: flex; gap: 1rem; margin-top: 0.5rem; }
+    .social-link { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; border: 1.5px solid var(--stone-light); padding: 0.45rem 1rem; border-radius: 2px; transition: border-color 0.2s, color 0.2s; }
+    .social-link:hover { border-color: var(--ink); color: var(--ink); }
+    .contact-form-wrap { background: var(--cream-deep); padding: 2.5rem; border-radius: 2px; }
+    .contact-form-wrap h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.4rem; }
+    .contact-form-wrap > p { font-size: 0.9rem; color: var(--stone); margin-bottom: 2rem; }
+    .form-group { margin-bottom: 1.4rem; }
+    .form-group label { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 0.5rem; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--cream); border: 1.5px solid var(--stone-light); border-radius: 2px; padding: 0.75rem 1rem; font-family: 'Lato', sans-serif; font-size: 0.95rem; color: var(--ink); transition: border-color 0.2s; -webkit-appearance: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--sage); }
+    .form-group textarea { height: 130px; resize: vertical; }
+    .form-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239C9080' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+    .form-submit { width: 100%; background: var(--ink); color: var(--cream); border: none; padding: 0.95rem 1.5rem; font-family: 'Lato', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 2px; cursor: pointer; transition: background 0.2s; margin-top: 0.5rem; }
+    .form-submit:hover { background: var(--sage); }
+    .form-note { font-size: 0.8rem; color: var(--stone); margin-top: 1rem; text-align: center; }
+    .photo-row { display: grid; grid-template-columns: repeat(5, 1fr); height: 260px; gap: 4px; }
+    .photo-row-item { overflow: hidden; }
+    .photo-row-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .photo-row-item:hover img { transform: scale(1.05); }
+    footer { background: var(--ink); color: var(--cream); padding: 4rem 2rem 2rem; }
+    .footer-inner { max-width: 1050px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(247,242,232,0.1); }
+    .footer-brand img { height: 60px; width: auto; filter: brightness(0) invert(1); opacity: 0.85; margin-bottom: 1rem; }
+    .footer-brand p { font-size: 0.9rem; color: rgba(247,242,232,0.55); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul a { text-decoration: none; color: rgba(247,242,232,0.65); font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--terracotta); }
+    .footer-bottom { max-width: 1050px; margin: 0 auto; padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: rgba(247,242,232,0.35); }
+    .footer-email a { color: var(--terracotta); text-decoration: none; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .contact-main-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .photo-row { grid-template-columns: repeat(3, 1fr); height: 200px; }
+      .photo-row-item:nth-child(4), .photo-row-item:nth-child(5) { display: none; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="ravenhouseLogo.png" alt="Raven House Co."></a>
+  <ul class="nav-links">
+    <li><a href="rh-about.html">About Us</a></li>
+    <li><a href="rh-farm.html">Farm & Homestead</a></li>
+    <li><a href="rh-learning.html">RH Learning</a></li>
+    <li><a href="rh-shop.html">Shop & Studio</a></li>
+    <li><a href="rh-contact.html" class="nav-cta active">Say Hello</a></li>
+  </ul>
+</nav>
 
+<header class="page-header">
+  <img class="page-header-img" src="506626320_122231613062215594_3741641693581821848_n.jpg" alt="Raven House sign at the property">
+  <div class="page-header-overlay"></div>
+  <div class="page-header-content">
+    <p class="page-eyebrow">Get in touch</p>
+    <h1>We're easy to find.<br><em>Just say hello.</em></h1>
+  </div>
+</header>
+
+<section class="contact-main">
+  <div class="contact-main-inner">
+    <div class="contact-info">
+      <h2>Whether it's eggs, learning circles, or something from the studio — we're happy to hear from you.</h2>
+      <p>We check messages regularly and try to respond within a day or two. We're a busy household, so if it takes a little longer, bear with us.</p>
+      <hr class="contact-divider">
+      <div class="contact-block">
+        <span class="contact-block-label">Email</span>
+        <a href="mailto:hello@ravenhouseco.ca" class="contact-email">hello@ravenhouseco.ca</a>
+      </div>
+      <div class="contact-block">
+        <span class="contact-block-label">Location</span>
+        <h3>Greenwood, Nova Scotia</h3>
+        <p>Annapolis Valley. Egg pickup is local — we'll sort out the details when you get in touch.</p>
+      </div>
+      <div class="contact-block">
+        <span class="contact-block-label">Follow along</span>
+        <p>We share what's happening on the farm, in the studio, and in learning circles on social.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">Facebook</a>
+          <a href="#" class="social-link">Instagram</a>
+        </div>
+      </div>
+      <hr class="contact-divider">
+      <div class="contact-block">
+        <span class="contact-block-label">RH Learning enquiries</span>
+        <p>If you're asking about learning circles or tutoring, let us know your child's age and grade in your message and we'll give you the most useful response.</p>
+      </div>
+      <div class="contact-block">
+        <span class="contact-block-label">Eggs & shop</span>
+        <p>Let us know you're looking for eggs or studio goods and we'll tell you what's available and how pickup works.</p>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <h3>Send us a message</h3>
+      <p>Fill in what's relevant — we'll take it from there.</p>
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-group">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" placeholder="How should we address you?" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="We'll reply here" required>
+        </div>
+        <div class="form-group">
+          <label for="reason">What's this about?</label>
+          <select id="reason" name="reason">
+            <option value="" disabled selected>Choose one</option>
+            <option value="eggs">Fresh eggs</option>
+            <option value="learning-circles">RH Learning — circles</option>
+            <option value="tutoring">RH Learning — tutoring</option>
+            <option value="studio">Studio goods</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Whatever you'd like us to know"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send message</button>
+        <p class="form-note">We'll get back to you within a day or two.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="photo-row">
+  <div class="photo-row-item"><img src="517360366_122237813816215594_4797684656958102494_n__1_.jpg" alt="Kids on the path at Raven House"></div>
+  <div class="photo-row-item"><img src="675645439_122290086836215594_1106015509438971186_n__1_.jpg" alt="Two goats at Raven House"></div>
+  <div class="photo-row-item"><img src="512690907_122235266804215594_4171212690145249456_n.jpg" alt="Child on horseback"></div>
+  <div class="photo-row-item"><img src="524331212_122242383350215594_2793304318457154875_n.jpg" alt="Baby goat portrait"></div>
+  <div class="photo-row-item"><img src="516800915_122238290534215594_3554167806495023009_n.jpg" alt="The studio shed"></div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="ravenhouseLogo.png" alt="Raven House Co.">
+      <p>A working homestead in the Annapolis Valley of Nova Scotia. Farm life, small-group learning, handmade goods, and the honest work of raising a family close to the land.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="rh-about.html">About Us</a></li>
+        <li><a href="rh-farm.html">Farm & Homestead</a></li>
+        <li><a href="rh-learning.html">RH Learning</a></li>
+        <li><a href="rh-shop.html">Shop & Studio</a></li>
+        <li><a href="rh-contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Find us</h4>
+      <ul>
+        <li><a href="#">Follow on Facebook</a></li>
+        <li><a href="#">Follow on Instagram</a></li>
+      </ul>
+      <div class="footer-email" style="margin-top:1.5rem;">
+        <h4>Say hello</h4>
+        <a href="mailto:hello@ravenhouseco.ca">hello@ravenhouseco.ca</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Raven House Co. — Annapolis Valley, NS</span>
+    <span>Laid by happy birds. Collected by noisy kids.</span>
+  </div>
+</footer>
+</body>
+</html>
